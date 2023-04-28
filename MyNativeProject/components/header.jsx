@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#008080",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingTop: 15,
-    paddingBottom: 10
+    paddingTop: 25,
+    paddingBottom: 17
   },
   headline: {
     fontSize: 25,
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     color: "#000",
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 50,
+    height: 50,
   },
 });

@@ -9,7 +9,6 @@ export default function App() {
         <View style={styles.main}>
           <List style={styles.list} />
         </View>
-        <Text>Zzzz</Text>
       </View>
   );
 }
