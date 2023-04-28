@@ -1,8 +1,9 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, View, Text } from 'react-native'
 import RadioForm from 'react-native-simple-radio-button'
 
-export const radiobuttons = () => {
+export const Radiobuttons = () => {
+    const [value, setValue] = useState(0)
 
     const items = [
         {label: 'Test 1', value: 0},
@@ -13,7 +14,7 @@ export const radiobuttons = () => {
   return (
     <View style={styles.btncontainer}>
         <Text style={styles.testText}>This is a test</Text>
-        <RadioForm radio_props={items} initial={0} />
+        <RadioForm radio_props={items} initial={value} onPress={(value) => setValue(value)} />
     </View>
   )
 }
