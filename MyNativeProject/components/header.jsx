@@ -4,7 +4,7 @@ import { Image, Text, View, StyleSheet } from "react-native";
 export const Header = () => {
   return (
     <View style={styles.header}>
-      <Text style={styles.headline}>TODOLIST</Text>
+      <Text style={styles.headline}>ToDoList</Text>
       <Image
         style={styles.logo}
         source={require("../assets/icon-144x144.png")}
@@ -18,15 +18,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     backgroundColor: "#008080",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingTop: 15,
+    paddingBottom: 10
   },
   headline: {
-    fontSize: 30,
-    color: "red",
-    verticalAlign: "middle",
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#000",
   },
   logo: {
-    flex: 1,
-    aspectRatio: 3.5,
-    resizeMode: "contain",
+    width: 100,
+    height: 100,
   },
 });
