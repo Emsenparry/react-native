@@ -1,8 +1,8 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { Header } from './components/header.jsx';
 import { List } from './components/list.jsx';
-import { Radiobuttons } from './components/radiobuttons.jsx';
-import { Dropdown } from './components/dropdown.jsx';
+// import { Radiobuttons } from './components/radiobuttons.jsx';
+// import { Dropdown } from './components/dropdown.jsx';
 
 export default function App() {
   return (
@@ -10,8 +10,6 @@ export default function App() {
         <Header />
         <View style={styles.main}>
           <List style={styles.list} />
-        <Radiobuttons />
-        <Dropdown />
         </View>
       </View>
   );

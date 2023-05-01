@@ -1,5 +1,12 @@
-import React from "react";
-import { View, Text, FlatList, StyleSheet, TextInput, Pressable } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TextInput,
+  Pressable,
+} from "react-native";
 
 const arrData = [
   { id: 1, title: "Item 1" },
@@ -16,18 +23,57 @@ const ListItem = (props) => {
 };
 
 export const List = () => {
+  // State var til input tekst
+  const [enteredTaskText, setEnteredTaskText] = useState();
+  // State var til task liste (array)
+  const [taskList, setTaskList] = useState([]);
+
+  // Handler som sætter input tekst var når den skrives i feltet
+  const taskTextHandler = (enteredTaskText) => {
+    setEnteredTaskText(enteredTaskText);
+    // console.log(enteredTaskText);
+  };
+
+  // Handler som tilføjer tekst til array af tasks
+  const addTaskHandler = () => {
+    setTaskList((curTasks) => [
+      // spread operator. Spreader nuværende liste
+      ...curTasks,
+      // Tilføjer id og tekst til nuværende liste
+      { id: Math.random().toString(), title: enteredTaskText },
+    ]);
+    // Nulstiller input tekst
+    setEnteredTaskText("");
+  };
+
+  // Handler til at slette tasks med
+  const deleteTask = (id) => {
+    // Sætter liste til sig selv uden id der skal slettes
+    setTaskList(taskList.filter((task) => task.id !== id));
+  };
+
   return (
     <View>
-        <View style={styles.formContainer}>
-            <TextInput placeholder="Indtast opgave" style={styles.textinput}></TextInput>
-            <Pressable style={styles.button}>
-                <Text style={styles.btnText}>+</Text>
-            </Pressable>
-        </View>
+      <View style={styles.formContainer}>
+        <TextInput
+          placeholder="Indtast opgave"
+          style={styles.textinput}
+          onChangeText={taskTextHandler}
+          value={enteredTaskText}
+        ></TextInput>
+        <Pressable style={styles.button} onPress={addTaskHandler}>
+          <Text style={styles.btnText}>+</Text>
+        </Pressable>
+      </View>
+      
       <FlatList
-        data={arrData}
+        data={taskList}
         renderItem={itemData => {
-          return <ListItem title={itemData.item.title}></ListItem>
+          return (
+            <Pressable onPress={e => deleteTask(itemData.item.id)}>
+              <ListItem title={itemData.item.title}></ListItem>
+            </Pressable>
+          );
         }}
       ></FlatList>
     </View>
@@ -35,44 +81,44 @@ export const List = () => {
 };
 
 const styles = StyleSheet.create({
-listitem: {
+  listitem: {
     borderWidth: 1,
     borderColor: "black",
     borderRadius: 6,
     backgroundColor: "teal",
     paddingHorizontal: 8,
     paddingVertical: 15,
-    marginBottom: 5
-},
-itemtxt: {
-    color: '#fff'
-},
-formContainer: {
-    flexDirection: 'row',
+    marginBottom: 5,
+  },
+  itemtxt: {
+    color: "#fff",
+  },
+  formContainer: {
+    flexDirection: "row",
     paddingBottom: 15,
     marginBottom: 20,
     borderBottomWidth: 1,
-    borderColor: 'black',
-    justifyContent: 'space-between'
-},
-textinput: {
+    borderColor: "black",
+    justifyContent: "space-between",
+  },
+  textinput: {
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: "black",
     borderRadius: 6,
-    width: '84%',
-    padding: 10
-},
-button: {
+    width: "84%",
+    padding: 10,
+  },
+  button: {
     paddingHorizontal: 8,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: "black",
     borderRadius: 5,
-    backgroundColor: 'darkgoldenrod',
+    backgroundColor: "darkgoldenrod",
     width: 50,
-    alignContent: 'center'
-},
-btnText: {
+    alignContent: "center",
+  },
+  btnText: {
     padding: 10,
     fontSize: 20,
-}
-})
+  },
+});
